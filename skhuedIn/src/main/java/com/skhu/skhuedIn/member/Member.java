@@ -4,10 +4,16 @@ package com.skhu.skhuedIn.member;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Setter
-@Getter
+
+
+@Setter @Getter
 public class Member {
+
+
     private Long user_id;
     private String user_email;
     private String user_pw;
@@ -21,5 +27,9 @@ public class Member {
         this.user_pw = user_pw;
         this.user_image_url = user_image_url;
         this.grade = grade;
+    }
+
+    public Member() {
+
     }
 }

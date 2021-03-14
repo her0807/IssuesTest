@@ -1,8 +1,14 @@
-package com.skhu.skhuedIn.domain;
+package com.skhu.skhuedIn.domain.item;
 
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 
 @Entity
-public class Movie {
+@Setter @Getter
+public class Movie extends Item{
+    private String director;
+    private String actor;
 }

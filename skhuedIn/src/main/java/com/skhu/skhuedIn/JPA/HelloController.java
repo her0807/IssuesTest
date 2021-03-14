@@ -1,2 +1,19 @@
-package com.skhu.skhuedIn;public class HelloController {
+package com.skhu.skhuedIn.JPA;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class HelloController {
+
+
+    @GetMapping("hello")
+    public  String Hello(Model model){
+        model.addAttribute("data", "hello");
+        return "hello";
+    }
+
+
 }

@@ -16,4 +16,13 @@ public class MemoryMemberRepository implements MemberRepository {
         return store.get(memberId);
     }
 
+    @Override
+    public Member[] findAll() {
+        Member[] members = store.values().toArray(new Member[0]);
+        return members;
+    }
+
+    @Override
+    public void delete(Member member){   store.remove(member);}
+
 }

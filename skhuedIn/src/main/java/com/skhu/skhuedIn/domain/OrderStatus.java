@@ -1,2 +1,6 @@
-package com.skhu.skhuedIn.domain;public enum OrderStatus {
+package com.skhu.skhuedIn.domain;
+
+public enum OrderStatus {
+    ORDER,
+    CANCEL
 }

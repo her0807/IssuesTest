@@ -1,20 +1,16 @@
-package com.skhu.skhuedIn.domain;
+package com.skhu.skhuedIn.domain.item;
 
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class Book {
+@DiscriminatorValue("B")
+public class Book extends Item {
+    private String author;
+    private String isbn;
 
-    @Id
-    @GeneratedValue
-    @Column(name = "book_id")
-    private Long id;
 }
