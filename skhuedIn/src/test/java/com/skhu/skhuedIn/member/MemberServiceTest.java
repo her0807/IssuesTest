@@ -1,57 +1,60 @@
 package com.skhu.skhuedIn.member;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.skhu.skhuedIn.domain.Member;
+import com.skhu.skhuedIn.repository.MemberRepository;
+import com.skhu.skhuedIn.service.MemberService;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+import static org.assertj.core.api.Fail.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
 class MemberServiceTest {
+
+    @Autowired
     MemberService memberService;
-    Member member;
-    Member member2;
-    Member member3;
-
-    @BeforeEach
-    public void beforeEach() {
-
-        memberService = new MemberServiceImpl();
-        member = new Member(1L, "abc", "her0807@~", "www", Grade.student);
-        member2 = new Member(2L, "adsadas", "her0807@~", "www", Grade.student);
-        member3 = new Member(4L, "abasdsac", "her0807@~", "www", Grade.student);
-    }
+    @Autowired
+    MemberRepository memberRepository;
 
     @Test
-    void save() {
+    public void 회원가입() throws Exception {
 
-        //given
 
-        //when
-        memberService.join(member);
-        memberService.join(member2);
-        memberService.join(member3);
-        Member findMember = memberService.findMember(1L);
-        //then
-        Assertions.assertThat(member).isEqualTo(findMember);
+//Given
+        Member member = new Member();
+        member.setName("kim");
+//When
+        Long saveId = memberService.join(member);
+//Then
+        assertEquals(member, memberRepository.findOne(saveId));
     }
 
-    @Test
-    void delete() {
-        memberService.delete(member2);
-        Member findMember = memberService.findMember(2L);
-        Assertions.assertThat(member2).isNotEqualTo(findMember);
-    }
+    @Test(expected = IllegalStateException.class)
+    public void 중복_회원_예외() throws Exception {
 
-    @Test
-    void findAll() {
-        Member[] members = memberService.findAll();
-        Member findMember = memberService.findMember(1L);
+        Member member1 = new Member();
+        member1.setName("kim");
+        Member member2 = new Member();
+        member2.setName("kim");
 
-        for(Member m : members){
-            System.out.println(m.getUser_id()+" "+m.getUser_email());
+        memberService.join(member1);
+        try {
+            memberService.join(member2); //예외가 발생해야 한다.
+        } catch (IllegalStateException e) {
+            return;
         }
-        //then
-        Assertions.assertThat(members).toString();
 
+
+        fail("예외가 발생해야 한다.");
     }
-
+//
 }
+
