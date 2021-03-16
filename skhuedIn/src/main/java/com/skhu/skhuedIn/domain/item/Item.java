@@ -2,6 +2,7 @@ package com.skhu.skhuedIn.domain.item;
 
 
 import com.skhu.skhuedIn.domain.Category;
+import com.skhu.skhuedIn.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,4 +26,22 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories  = new ArrayList<>();
+
+
+
+    //== 비지니스 로직 설정
+
+    public void addStrock(int quntity){
+        this.stockQuantity +=quntity;
+    }
+
+
+    public void removeStock(int quantity){
+        int restStock = this.stockQuantity-quantity;
+        if(restStock<0){
+            throw  new NotEnoughStockException("need more stock");
+
+        }
+        this.stockQuantity=restStock;
+    }
 }

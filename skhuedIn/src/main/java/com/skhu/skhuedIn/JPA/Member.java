@@ -1,7 +1,6 @@
 package com.skhu.skhuedIn.JPA;
 
 
-import com.skhu.skhuedIn.member.Grade;
 import lombok.Getter;
 import lombok.Setter;
 
