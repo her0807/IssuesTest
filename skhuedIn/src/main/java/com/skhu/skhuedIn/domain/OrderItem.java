@@ -2,14 +2,21 @@ package com.skhu.skhuedIn.domain;
 
 
 import com.skhu.skhuedIn.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Setter@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
+//
+//    protected OrderItem(){
+//
+//    }
 
     @Id @GeneratedValue
     @Column(name = "order_item_id")

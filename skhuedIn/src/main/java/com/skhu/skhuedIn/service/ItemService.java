@@ -1,6 +1,7 @@
 package com.skhu.skhuedIn.service;
 
 
+import com.skhu.skhuedIn.domain.item.Book;
 import com.skhu.skhuedIn.domain.item.Item;
 import com.skhu.skhuedIn.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,15 +19,26 @@ public class ItemService {
 
 
     @Transactional
-    public void saveItem(Item item){
+    public void saveItem(Item item) {
         itemRepository.save(item);
     }
 
-    public List<Item> findItems(){
+    @Transactional
+    public void updateItem(Long itemId, Book param){
+
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setPrice(param.getPrice());
+        findItem.setName(param.getName());
+        findItem.setStockQuantity(param.getStockQuantity());
+
+    }
+
+
+    public List<Item> findItems() {
         return itemRepository.findAll();
     }
 
-    public Item findOne(Long itemId){
+    public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }
 }

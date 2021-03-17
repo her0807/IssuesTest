@@ -1,7 +1,9 @@
 package com.skhu.skhuedIn.domain;
 
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.aspectj.weaver.ast.Or;
 
@@ -12,10 +14,16 @@ import java.util.List;
 
 import static javax.persistence.FetchType.*;
 
+
+/**
+* 코드는 제약하는 형식으로 짜는게 코드 유지보수할 때 훨씬 좋다
+ */
 @Entity
 @Table(name = "orders")
 @Setter @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
+
 
     @Id @GeneratedValue
     @Column(name = "order_id")
